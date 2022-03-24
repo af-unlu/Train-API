@@ -8,7 +8,10 @@ module.exports.get = async (req, res) => {
 module.exports.post = async (req, res) => {
 
     let result = validate(req.body, Train);
-    
+    res.status(200).json({
+        "result":result
+    });
+
 }
 
 /*
