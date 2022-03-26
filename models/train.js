@@ -1,14 +1,12 @@
-const Train = {
-  name: String,
-  people_count: Number,
-  can_seperated: Boolean,
-  cars:[
+const Tren = {
+  Ad: String,
+  Vagonlar:[
     {
-      name:String,
-      capacity:Number,
-      taken_seats:Number
+      Ad:String,
+      Kapasite:Number,
+      DoluKoltukAdet:Number
     }
   ]
 }
 
-module.exports = Train;
+module.exports = {Tren};

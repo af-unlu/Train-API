@@ -1,87 +1,104 @@
 
 const validate = (req, res,next) => {
-    const { name, people_count, can_seperated,cars } = req.body;
+    const { Tren,RezervasyonYapilacakKisiSayisi,KisilerFarkliVagonlaraYerlestirilebilir } = req.body;
     let missingFields = [];
     let validationError = false;
 
-    if(name){
-        if(!(typeof name =="string")){
-            missingFields.push("name");
+
+
+    if(Tren !=null){
+        //exist
+        if(!(typeof Tren =="object")){
+            missingFields.push("Tren Obje Değil");
             validationError=true;
         }
-    }else{
-        missingFields.push("name");
+        else{
+            if(Tren.Ad !=null){
+                //exist
+                if(!(typeof Tren.Ad=="string")){
+                    missingFields.push("Tren Ad Tip Error");
+                    validationError=true;
+                }
+            }
+            else{
+                missingFields.push("Tren Ad");
+                validationError=true;
+            }
+
+            if(Array.isArray(Tren.Vagonlar)){
+                Tren.Vagonlar.forEach(element => {
+                    if(element.Ad !=null){
+                        //exist
+                        if(!(typeof element.Ad=="string")){
+                            missingFields.push("Ad Tip Error");
+                            validationError=true;
+                        }
+                    }
+                    else{
+                        missingFields.push("Ad");
+                        validationError=true;
+                    }
+                    //
+                    if(element.Kapasite !=null){
+                        //exist
+                        if(!(typeof element.Kapasite=="number")){
+                            missingFields.push("Kapasite Tip Error");
+                            validationError=true;
+                        }
+                    }
+                    else{
+                        missingFields.push("Kapasite");
+                        validationError=true;
+                    }
+                    //
+                    if(element.DoluKoltukAdet !=null){
+                        //exist
+                        if(!(typeof element.DoluKoltukAdet=="number")){
+                            missingFields.push("DoluKoltukAdet Tip Error");
+                            validationError=true;
+                        }
+                    }
+                    else{
+                        missingFields.push("DoluKoltukAdet");
+                        validationError=true;
+                    }
+                });
+            }else{
+                missingFields.push("Vagonlar Tip Error");
+                validationError=true;
+            }
+        }
+    }
+    else{
+        missingFields.push("Tren");
         validationError=true;
     }
 
-    if(people_count){
-        if(!(typeof people_count =="number")){
-            missingFields.push("people_count");
+    if(RezervasyonYapilacakKisiSayisi !=null){
+        //exist
+        if(!(typeof RezervasyonYapilacakKisiSayisi=="number")){
+            missingFields.push("RezervasyonYapilacakKisiSayisi Tip Error");
             validationError=true;
         }
     }
     else{
-        missingFields.push("people_count");
+        missingFields.push("RezervasyonYapilacakKisiSayisi");
         validationError=true;
     }
 
-    if(can_seperated){
-        if(!(typeof can_seperated =="boolean")){
-            missingFields.push("can_seperated");
+    if(KisilerFarkliVagonlaraYerlestirilebilir !=null){
+        //exist
+        if(!(typeof KisilerFarkliVagonlaraYerlestirilebilir=="boolean")){
+            missingFields.push("KisilerFarkliVagonlaraYerlestirilebilir Tip Error");
             validationError=true;
         }
     }
     else{
-        missingFields.push("can_seperated");
+        missingFields.push("KisilerFarkliVagonlaraYerlestirilebilir");
         validationError=true;
     }
 
-    if(cars){
-        if(!(typeof cars =="object")){
-            missingFields.push("cars");
-            validationError=true;
-        }else
-        {
 
-            cars.forEach(element => {
-                if(element.name){
-                    if(!(typeof cars.name =="string")){
-                        missingFields.push("cars.item.name");
-                        validationError=true;
-                    }
-                }else{
-                    missingFields.push("cars.name");
-                    validationError=true;
-                }
-    
-                if(element.capacity){
-                    if(!(typeof cars.capacity =="number")){
-                        missingFields.push("cars.item.capacity");
-                        validationError=true;
-                    }
-                }
-                else{
-                    missingFields.push("cars.item.capacity");
-                    validationError=true;
-                }
-                
-                if(element.taken_seats){
-                    if(!(typeof cars.taken_seats =="number")){
-                        missingFields.push("cars.item.taken_seats");
-                        validationError=true;
-                    }
-                }
-                else{
-                    missingFields.push("cars.item.taken_seats");
-                    validationError=true;
-                }
-            });
-        }
-    }
-    else{
-        missingFields.push("cars");
-        validationError=true;
-    }
     res.locals.validationError = validationError;
     res.locals.missingFields = missingFields;
     next();
