@@ -12,7 +12,7 @@ app.use((err, req, res, next) => {
     }
     next();
 });
-const port = process.env.NODE_ENV || 3000;
+
 
 app.set('port', port);
 app.use(bodyParser.json());
@@ -26,4 +26,4 @@ app.use(function(req, res, next) {
     res.json({ error: 'Not found' });
 });
 
-app.listen(port, () => { console.log(`App running on port ${port}`) });
+app.listen(process.env.PORT);
