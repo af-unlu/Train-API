@@ -9,5 +9,4 @@ router.route('/bookride')
 .post(validate,book_ride_controller.post);
 
 
-
 module.exports = router;
