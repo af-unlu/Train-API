@@ -1,4 +1,5 @@
 # trains
+Proplem:
 Genel Bilgiler
 Bir tren rezervasyonu uygulaması için, istenilen rezervasyonunun yapılıp yapılamayacağını ve yapılabiliyorsa hangi vagon için rezervasyon onaylanabileceğini belirleyen bir HTTP API geliştirilecektir.
 
