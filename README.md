@@ -54,3 +54,7 @@ Rezervasyon yapılamıyorsa YerlesimAyrinti bos array olacaktır;
     "RezervasyonYapilabilir":true,
     "YerlesimAyrinti":[    ]
 }
+
+Çözümüm:
+Öncelikle kullanıcıdan gelen json formatındaki verinin valid olup olmadığını kontrol etmek gerekli, bu işlem bir middleware tarafından hallediliyor.
+Sonrasında ise ana senaryonun işleyişi gelmektedir.
